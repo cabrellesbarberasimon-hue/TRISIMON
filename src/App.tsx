@@ -7,6 +7,7 @@ import { Dashboard } from './features/dashboard/Dashboard';
 import { ComingSoon } from './features/ComingSoon';
 import { NutritionPage } from './features/nutricion/NutritionPage';
 import { BodyPage } from './features/composicion/BodyPage';
+import { TrainingPage } from './features/entreno/TrainingPage';
 import { BodySettings } from './features/ajustes/BodySettings';
 import { SettingsHome } from './features/ajustes/SettingsHome';
 import { ProfileSettings } from './features/ajustes/ProfileSettings';
@@ -37,7 +38,7 @@ export default function App() {
           <Route index element={<Dashboard />} />
           <Route path="nutricion/*" element={<NutritionPage />} />
           <Route path="cuerpo/*" element={<BodyPage />} />
-          <Route path="entreno/*" element={<ComingSoon title="Entrenamiento" phase={4} />} />
+          <Route path="entreno/*" element={<TrainingPage />} />
           <Route path="informes/*" element={<ComingSoon title="Informes para IA" phase={6} />} />
           <Route path="ajustes" element={<SettingsHome />} />
           <Route path="ajustes/perfil" element={<ProfileSettings />} />

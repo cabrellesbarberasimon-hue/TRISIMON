@@ -1,6 +1,7 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { WeekNav } from '../../components/WeekNav';
 import { Button, Card, Field, Select, Sheet, TextInput, Toggle, cx } from '../../components/ui';
 import { db } from '../../db/db';
 import { duplicateWeek, emptyDay, saveDay } from '../../db/nutritionRepo';
@@ -9,6 +10,7 @@ import { bmrAt, energyBalance, trainingKcalOn } from '../../domain/balance';
 import { dayTotals, MEAL_SLOTS } from '../../domain/macros';
 import { buildProfile } from '../../domain/profile';
 import { evaluateDay, worstLight } from '../../domain/semaphore';
+import { suggestDayType } from '../../domain/dayTypeSuggest';
 import { weekSummary } from '../../domain/weekSummary';
 import { addDays, formatDate, formatDateLong, startOfWeek, today, weekDates, WEEKDAYS_SHORT } from '../../lib/dates';
 import { formatNumber } from '../../lib/format';
@@ -56,24 +58,7 @@ export function NutritionWeek() {
 
   return (
     <>
-      <div className="mb-3 flex items-center justify-between gap-2">
-        <Button variant="secondary" onClick={() => go(addDays(weekStart, -7))} aria-label="Semana anterior">
-          ‹
-        </Button>
-        <div className="text-center text-sm">
-          <div className="font-semibold">
-            {formatDate(weekStart, { day: 'numeric', month: 'short' })} – {formatDate(addDays(weekStart, 6), { day: 'numeric', month: 'short', year: 'numeric' })}
-          </div>
-          {!dates.includes(today()) && (
-            <button type="button" className="text-xs text-brand-700" onClick={() => go(startOfWeek(today()), today())}>
-              Ir a hoy
-            </button>
-          )}
-        </div>
-        <Button variant="secondary" onClick={() => go(addDays(weekStart, 7))} aria-label="Semana siguiente">
-          ›
-        </Button>
-      </div>
+      <WeekNav weekStart={weekStart} onChange={(w) => go(w)} />
 
       <div className="mb-4 grid grid-cols-7 gap-1">
         {rows.map((r, i) => (
@@ -159,6 +144,9 @@ function DayEditor({ date, stored, data, trainingKcal, bmr }: { date: string; st
   const total = dayTotals(day, index);
   const ev = evaluateDay(total, dayType, settings.semaphoreTolerancePct);
   const update = (d: NutritionDay) => saveDay(d);
+  const planned = useLiveQuery(() => db.plannedSessions.where('date').equals(date).toArray(), [date]);
+  const suggestion = planned ? suggestDayType(planned, settings.dayTypeRules) : null;
+  const suggestedName = suggestion ? (typeMap.get(suggestion.dayTypeId)?.name ?? '—') : '';
 
   return (
     <>
@@ -171,8 +159,13 @@ function DayEditor({ date, stored, data, trainingKcal, bmr }: { date: string; st
             options={dayTypes.map((t) => ({ value: t.id, label: t.name }))}
           />
         </Field>
-        {day.dayTypeManual && (
-          <button type="button" className="mt-1 text-xs text-brand-700" onClick={() => update({ ...day, dayTypeManual: false })}>
+        {suggestion && (
+          <p className="mt-1 text-xs text-slate-500">
+            Plan de entreno: {suggestedName.toLowerCase()} ({suggestion.reason.toLowerCase()}).
+          </p>
+        )}
+        {day.dayTypeManual && suggestion && (
+          <button type="button" className="mt-1 text-xs text-brand-700" onClick={() => update({ ...day, dayTypeManual: false, dayTypeId: suggestion.dayTypeId })}>
             Volver a automático
           </button>
         )}

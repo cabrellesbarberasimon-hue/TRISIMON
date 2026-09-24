@@ -68,8 +68,8 @@ export function Field({ label, hint, children, className }: { label: string; hin
 export const inputClass =
   'w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-base outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100 disabled:bg-slate-100';
 
-export function TextInput({ value, onChange, placeholder, type = 'text' }: { value: string; onChange: (v: string) => void; placeholder?: string; type?: string }) {
-  return <input type={type} className={inputClass} value={value} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} />;
+export function TextInput({ value, onChange, placeholder, type = 'text', list }: { value: string; onChange: (v: string) => void; placeholder?: string; type?: string; list?: string }) {
+  return <input type={type} className={inputClass} value={value} placeholder={placeholder} list={list} onChange={(e) => onChange(e.target.value)} />;
 }
 
 export function TextArea({ value, onChange, rows = 3, placeholder }: { value: string; onChange: (v: string) => void; rows?: number; placeholder?: string }) {
@@ -146,7 +146,7 @@ export function ListInput({ value, onChange, placeholder }: { value: string[]; o
 }
 
 /** Texto que se guarda al salir del campo (evita escrituras en cada tecla) */
-export function CommitTextInput({ value, onCommit, placeholder, className }: { value: string; onCommit: (v: string) => void; placeholder?: string; className?: string }) {
+export function CommitTextInput({ value, onCommit, placeholder, className, list }: { value: string; onCommit: (v: string) => void; placeholder?: string; className?: string; list?: string }) {
   const [text, setText] = useState(value);
   useEffect(() => setText(value), [value]);
   return (
@@ -154,6 +154,7 @@ export function CommitTextInput({ value, onCommit, placeholder, className }: { v
       className={cx(inputClass, className)}
       value={text}
       placeholder={placeholder}
+      list={list}
       onChange={(e) => setText(e.target.value)}
       onBlur={() => text !== value && onCommit(text)}
       onKeyDown={(e) => e.key === 'Enter' && (e.target as HTMLInputElement).blur()}

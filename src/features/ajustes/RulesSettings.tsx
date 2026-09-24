@@ -1,7 +1,9 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { NumberInput } from '../../components/NumberInput';
 import { SaveBar } from '../../components/SaveBar';
-import { Card, Field, ListInput, PageHeader, Select, Toggle } from '../../components/ui';
+import { Button, Card, Field, ListInput, PageHeader, Select, Toggle } from '../../components/ui';
+import { resyncDayTypesFrom } from '../../db/trainingRepo';
+import { today } from '../../lib/dates';
 import { db } from '../../db/db';
 import type { AlertThresholds, DayTypeRules } from '../../db/types';
 import { SPORTS, SPORT_LABELS } from '../../domain/sports';
@@ -69,6 +71,20 @@ export function RulesSettings() {
         <Field label="Palabras de intensidad suave (separadas por coma)" className="mt-3">
           <ListInput value={rules.easyKeywords} onChange={(v) => setRules({ easyKeywords: v })} />
         </Field>
+      </Card>
+
+      <Card title="Aplicar reglas">
+        <p className="mb-2 text-xs text-slate-500">Recalcula desde hoy el tipo de día de los días no fijados a mano (guarda antes los cambios).</p>
+        <Button
+          variant="secondary"
+          disabled={dirty}
+          onClick={async () => {
+            const n = await resyncDayTypesFrom(today());
+            alert(`${n} días revisados.`);
+          }}
+        >
+          Recalcular tipos de día
+        </Button>
       </Card>
 
       <Card title="Umbrales de alertas">
