@@ -96,6 +96,14 @@ export const DEFAULT_SETTINGS: Settings = {
     fatigueHigh: 4,
     fatigueHighDays: 3,
   },
+  bodyRanges: {
+    bmi: { min: 18.5, max: 25 },
+    bodyFatPct: { min: 10, max: 20 },
+    visceralFat: { min: null, max: 9 },
+    subcutaneousFatPct: { min: 8.6, max: 16.7 },
+    asmi: { min: 7, max: null },
+    whr: { min: null, max: 0.9 },
+  },
   methodologyNote: excelData.methodology.replace(/\n?Todos los rangos.*$/s, '').trim(),
   promptTemplates: DEFAULT_PROMPTS,
 };

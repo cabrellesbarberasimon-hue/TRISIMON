@@ -6,6 +6,8 @@ import { seedIfEmpty } from './db/seed';
 import { Dashboard } from './features/dashboard/Dashboard';
 import { ComingSoon } from './features/ComingSoon';
 import { NutritionPage } from './features/nutricion/NutritionPage';
+import { BodyPage } from './features/composicion/BodyPage';
+import { BodySettings } from './features/ajustes/BodySettings';
 import { SettingsHome } from './features/ajustes/SettingsHome';
 import { ProfileSettings } from './features/ajustes/ProfileSettings';
 import { TestsSettings } from './features/ajustes/TestsSettings';
@@ -34,7 +36,7 @@ export default function App() {
         <Route element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path="nutricion/*" element={<NutritionPage />} />
-          <Route path="cuerpo/*" element={<ComingSoon title="Composición corporal" phase={3} />} />
+          <Route path="cuerpo/*" element={<BodyPage />} />
           <Route path="entreno/*" element={<ComingSoon title="Entrenamiento" phase={4} />} />
           <Route path="informes/*" element={<ComingSoon title="Informes para IA" phase={6} />} />
           <Route path="ajustes" element={<SettingsHome />} />
@@ -43,6 +45,7 @@ export default function App() {
           <Route path="ajustes/zonas" element={<ZonesSettings />} />
           <Route path="ajustes/disponibilidad" element={<AvailabilitySettings />} />
           <Route path="ajustes/nutricion" element={<NutritionSettings />} />
+          <Route path="ajustes/composicion" element={<BodySettings />} />
           <Route path="ajustes/reglas" element={<RulesSettings />} />
           <Route path="ajustes/datos" element={<DataSettings />} />
         </Route>

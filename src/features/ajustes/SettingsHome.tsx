@@ -7,6 +7,7 @@ const SECTIONS = [
   { to: 'zonas', title: 'Zonas de entrenamiento', desc: 'Calculadas desde los últimos tests; % editables' },
   { to: 'disponibilidad', title: 'Disponibilidad y lesiones', desc: 'Horas por día, instalaciones, molestias' },
   { to: 'nutricion', title: 'Nutrición', desc: 'Tipos de día, semáforo, perfil, alcohol' },
+  { to: 'composicion', title: 'Composición corporal', desc: 'Rangos de referencia de la báscula' },
   { to: 'reglas', title: 'Reglas y alertas', desc: 'Sugerencia de tipo de día y umbrales de alertas' },
   { to: 'datos', title: 'Datos', desc: 'Contenido de la base de datos local y restablecer' },
 ];

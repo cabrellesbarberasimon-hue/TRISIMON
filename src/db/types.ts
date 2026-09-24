@@ -350,6 +350,11 @@ export interface ProfileOverrides {
   bmrKcal: number | null;
 }
 
+export interface ReferenceRange {
+  min: number | null;
+  max: number | null;
+}
+
 export interface Settings {
   id: 'main';
   athleteName: string;
@@ -370,6 +375,8 @@ export interface Settings {
   dayTypeRules: DayTypeRules;
   alcoholRules: AlcoholRules;
   alertThresholds: AlertThresholds;
+  /** Rangos de referencia de la báscula por campo (clave = campo de BodyScan) */
+  bodyRanges: Record<string, ReferenceRange>;
   methodologyNote: string;
   promptTemplates: Record<string, string>;
 }
