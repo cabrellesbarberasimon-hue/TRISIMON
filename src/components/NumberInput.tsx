@@ -11,10 +11,12 @@ interface Props {
   className?: string;
   min?: number;
   max?: number;
+  /** Tamaño compacto para rejillas estrechas */
+  compact?: boolean;
 }
 
 /** Campo numérico con coma decimal. Guarda el valor al salir del campo o al pulsar Intro. */
-export function NumberInput({ value, onChange, decimals = 2, suffix, placeholder, className, min, max }: Props) {
+export function NumberInput({ value, onChange, decimals = 2, suffix, placeholder, className, min, max, compact }: Props) {
   const format = (v: number | null) => (v === null ? '' : formatMax(v, decimals, ''));
   const [text, setText] = useState(format(value));
   useEffect(() => setText(format(value)), [value]);
@@ -30,7 +32,7 @@ export function NumberInput({ value, onChange, decimals = 2, suffix, placeholder
   return (
     <div className={cx('relative', className)}>
       <input
-        className={cx(inputClass, suffix && 'pr-12')}
+        className={cx(inputClass, suffix && 'pr-12', compact && 'px-2 py-1.5 text-sm')}
         inputMode="decimal"
         value={text}
         placeholder={placeholder}

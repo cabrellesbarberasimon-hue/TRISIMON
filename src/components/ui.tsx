@@ -23,9 +23,9 @@ export function PageHeader({ title, subtitle, back, action }: { title: string; s
   );
 }
 
-export function Card({ title, children, className, action }: { title?: string; children: ReactNode; className?: string; action?: ReactNode }) {
+export function Card({ title, children, className, action, flush }: { title?: string; children: ReactNode; className?: string; action?: ReactNode; flush?: boolean }) {
   return (
-    <section className={cx('mb-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm', className)}>
+    <section className={cx('mb-4 rounded-2xl border border-slate-200 bg-white shadow-sm', flush ? 'overflow-hidden' : 'p-4', className)}>
       {(title || action) && (
         <div className="mb-3 flex items-center justify-between gap-2">
           {title && <h2 className="font-semibold text-slate-800">{title}</h2>}
@@ -142,5 +142,60 @@ export function ListInput({ value, onChange, placeholder }: { value: string[]; o
       onChange={(e) => setText(e.target.value)}
       onBlur={() => onChange(text.split(',').map((x) => x.trim()).filter(Boolean))}
     />
+  );
+}
+
+/** Texto que se guarda al salir del campo (evita escrituras en cada tecla) */
+export function CommitTextInput({ value, onCommit, placeholder, className }: { value: string; onCommit: (v: string) => void; placeholder?: string; className?: string }) {
+  const [text, setText] = useState(value);
+  useEffect(() => setText(value), [value]);
+  return (
+    <input
+      className={cx(inputClass, className)}
+      value={text}
+      placeholder={placeholder}
+      onChange={(e) => setText(e.target.value)}
+      onBlur={() => text !== value && onCommit(text)}
+      onKeyDown={(e) => e.key === 'Enter' && (e.target as HTMLInputElement).blur()}
+    />
+  );
+}
+
+export function Sheet({ open, onClose, title, children }: { open: boolean; onClose: () => void; title: string; children: ReactNode }) {
+  if (!open) return null;
+  return (
+    <div className="fixed inset-0 z-30 flex items-end justify-center bg-black/40 sm:items-center" onClick={onClose}>
+      <div
+        className="flex max-h-[85dvh] w-full max-w-screen-sm flex-col rounded-t-2xl bg-white pb-[env(safe-area-inset-bottom)] shadow-xl sm:rounded-2xl"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-label={title}
+      >
+        <div className="flex items-center justify-between border-b border-slate-200 p-4">
+          <h2 className="font-semibold">{title}</h2>
+          <button type="button" className="rounded-lg px-2 text-xl text-slate-500" onClick={onClose} aria-label="Cerrar">
+            ×
+          </button>
+        </div>
+        <div className="overflow-y-auto p-4">{children}</div>
+      </div>
+    </div>
+  );
+}
+
+export function Tabs<T extends string>({ value, onChange, options }: { value: T; onChange: (v: T) => void; options: { value: T; label: string }[] }) {
+  return (
+    <div className="mb-4 flex gap-1 rounded-xl bg-slate-200/70 p-1">
+      {options.map((o) => (
+        <button
+          key={o.value}
+          type="button"
+          onClick={() => onChange(o.value)}
+          className={cx('flex-1 rounded-lg px-2 py-1.5 text-sm font-medium', value === o.value ? 'bg-white shadow-sm' : 'text-slate-600')}
+        >
+          {o.label}
+        </button>
+      ))}
+    </div>
   );
 }

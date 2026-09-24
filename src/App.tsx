@@ -5,6 +5,7 @@ import { db } from './db/db';
 import { seedIfEmpty } from './db/seed';
 import { Dashboard } from './features/dashboard/Dashboard';
 import { ComingSoon } from './features/ComingSoon';
+import { NutritionPage } from './features/nutricion/NutritionPage';
 import { SettingsHome } from './features/ajustes/SettingsHome';
 import { ProfileSettings } from './features/ajustes/ProfileSettings';
 import { TestsSettings } from './features/ajustes/TestsSettings';
@@ -32,7 +33,7 @@ export default function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Dashboard />} />
-          <Route path="nutricion/*" element={<ComingSoon title="Nutrición" phase={2} />} />
+          <Route path="nutricion/*" element={<NutritionPage />} />
           <Route path="cuerpo/*" element={<ComingSoon title="Composición corporal" phase={3} />} />
           <Route path="entreno/*" element={<ComingSoon title="Entrenamiento" phase={4} />} />
           <Route path="informes/*" element={<ComingSoon title="Informes para IA" phase={6} />} />

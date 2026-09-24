@@ -65,7 +65,7 @@ Todo es editable desde la app. *Ajustes → Datos → Restablecer* vuelve a este
 ## Fases
 
 1. ✅ Estructura, modelo de datos, seed desde el Excel y ajustes (perfil deportivo, tests, zonas).
-2. Módulo de nutrición completo.
+2. ✅ Módulo de nutrición completo (totales, semáforo y gramos de la cena verificados contra el Excel).
 3. Composición corporal y pliegues.
 4. Entrenamiento: planificación, registro y conexión con la nutrición.
 5. Dashboard, gráficas, PWA y exportación/importación.
