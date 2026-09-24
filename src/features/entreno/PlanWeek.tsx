@@ -8,7 +8,7 @@ import { applyWeekTemplate, copyWeekPlan, saveWeekTemplate, type PlanMode } from
 import type { PlannedSession, Session } from '../../db/types';
 import { suggestDayType } from '../../domain/dayTypeSuggest';
 import { SPORT_COLORS, SPORT_LABELS } from '../../domain/sports';
-import { compliance } from '../../domain/training';
+import { compliance, dueSessions } from '../../domain/training';
 import { useSettings } from '../../hooks/useSettings';
 import { addDays, formatDate, startOfWeek, today, weekDates, WEEKDAYS } from '../../lib/dates';
 import { formatMinutes, formatNumber } from '../../lib/format';
@@ -48,7 +48,7 @@ export function PlanWeek() {
   const t = today();
   // En la semana en curso solo cuenta lo planificado hasta hoy; las sesiones futuras aún no se pueden cumplir
   const isPastOrCurrent = weekStart <= startOfWeek(t);
-  const due = planned.filter((p) => p.date <= t);
+  const due = dueSessions(planned, done, t);
   const comp = compliance(planned, done);
   const dueComp = compliance(due, done);
   const plannedMin = planned.reduce((a, p) => a + (p.durationMin ?? 0), 0);

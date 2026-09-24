@@ -82,3 +82,9 @@ export function compliance(planned: PlannedSession[], sessions: Session[]): { it
   const pct = items.length ? (items.reduce((a, i) => a + i.completion, 0) / items.length) * 100 : null;
   return { items, pct, unplanned };
 }
+
+/** Sesiones exigibles a fecha de hoy: las de días anteriores y las de hoy que ya se han hecho */
+export function dueSessions(planned: PlannedSession[], sessions: Session[], today: string): PlannedSession[] {
+  const doneIds = new Set(sessions.map((s) => s.plannedSessionId).filter(Boolean));
+  return planned.filter((p) => p.date < today || (p.date === today && doneIds.has(p.id)));
+}

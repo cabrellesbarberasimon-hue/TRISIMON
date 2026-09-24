@@ -128,3 +128,15 @@ describe('bienestar', async () => {
     expect(maxHighFatigueStreak([w('2026-10-01', 5), w('2026-10-03', 5)], 4).length).toBe(1);
   });
 });
+
+describe('sesiones exigibles', async () => {
+  const { dueSessions } = await import('./training');
+  it('incluye días pasados y lo ya hecho hoy, no lo pendiente de hoy ni lo futuro', () => {
+    const past = { ...p('carrera', 60), date: '2026-09-23' };
+    const todayDone = { ...p('natacion', 45), date: '2026-09-24' };
+    const todayPending = { ...p('bici', 60), date: '2026-09-24' };
+    const future = { ...p('bici', 60), date: '2026-09-25' };
+    const done = [s('2026-09-24T07:00', 'natacion', 45, { plannedSessionId: todayDone.id })];
+    expect(dueSessions([past, todayDone, todayPending, future], done, '2026-09-24').map((x) => x.id)).toEqual([past.id, todayDone.id]);
+  });
+});

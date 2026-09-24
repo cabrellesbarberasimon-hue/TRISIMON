@@ -30,10 +30,27 @@ deployment → Source: GitHub Actions*. La URL será `https://<usuario>.github.i
 
 Los datos no salen del móvil: la web solo sirve el código.
 
-Instalación como PWA (disponible a partir de la fase 5):
+Instalación como PWA (funciona sin conexión una vez instalada):
 
-- **Android (Chrome):** abre la URL → menú ⋮ → *Instalar aplicación*.
-- **iPhone (Safari):** abre la URL → botón compartir → *Añadir a pantalla de inicio*.
+- **Android (Chrome):** abre la URL → menú ⋮ → *Instalar aplicación* (o *Añadir a pantalla de inicio*).
+- **iPhone (Safari):** abre la URL → botón compartir → *Añadir a pantalla de inicio*. En iOS
+  instálala siempre desde Safari: los datos de la app instalada son independientes de los de la
+  pestaña del navegador.
+
+Las actualizaciones se descargan solas: al publicar una versión nueva, basta con cerrar y volver
+a abrir la app.
+
+## Copias de seguridad
+
+Los datos viven solo en el dispositivo (IndexedDB). En *Ajustes → Datos*:
+
+- **Exportar copia**: descarga un `.json` con todo, capturas incluidas. Guárdalo en Drive, en el
+  correo, etc. La pantalla de inicio avisa si hace más de 14 días de la última copia.
+- **Importar copia**: valida el archivo, muestra su contenido y, si confirmas, sustituye los
+  datos del dispositivo (sirve también para pasar los datos a otro móvil).
+- **Descargar Excel**: un `.xlsx` con una hoja por tipo de dato para analizarlo fuera de la app.
+
+Si borras los datos del navegador o desinstalas la app, se pierde todo lo que no esté en una copia.
 
 ## Estructura
 
@@ -44,6 +61,7 @@ src/
   features/    pantallas por módulo (ajustes, nutricion, composicion, entreno, informes, dashboard)
   components/  componentes de interfaz reutilizables
   lib/         fechas y formato de números en español
+public/icons/  iconos de la PWA (generados desde icon.svg)
 scripts/
   extract_excel.py   regenera src/db/seed/excelData.ts desde el Excel (requiere openpyxl)
 ```
@@ -68,5 +86,5 @@ Todo es editable desde la app. *Ajustes → Datos → Restablecer* vuelve a este
 2. ✅ Módulo de nutrición completo (totales, semáforo y gramos de la cena verificados contra el Excel).
 3. ✅ Composición corporal y pliegues.
 4. ✅ Entrenamiento: planificación, registro y conexión con la nutrición.
-5. Dashboard, gráficas, PWA y exportación/importación.
+5. ✅ Dashboard, gráficas, PWA y exportación/importación.
 6. Informes para IA e importación de planes.

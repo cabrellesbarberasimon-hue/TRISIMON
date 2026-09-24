@@ -10,3 +10,7 @@ export function ComingSoon({ title, phase }: { title: string; phase: number }) {
     </>
   );
 }
+
+export function ReportsSoon() {
+  return <ComingSoon title="Informes para IA" phase={6} />;
+}
