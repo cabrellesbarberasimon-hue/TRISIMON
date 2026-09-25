@@ -24,9 +24,10 @@ dirección `http://<IP-del-ordenador>:5173`.
 
 ## Publicar e instalar en el móvil
 
-La app se despliega en GitHub Pages con `.github/workflows/deploy.yml` en cada push a `main`
-(o a mano desde la pestaña *Actions*). Primera vez: en GitHub, *Settings → Pages → Build and
-deployment → Source: GitHub Actions*. La URL será `https://<usuario>.github.io/TRISIMON/`.
+La app está publicada en Vercel: **https://trisimon.vercel.app**. Vercel despliega solo en cada
+push a la rama de producción y crea una versión de prueba para cada PR. `vercel.json` hace que
+`index.html`, el service worker y el manifiesto no se queden en caché (así el móvil recibe las
+actualizaciones) y que los archivos con hash en `assets/` se guarden indefinidamente.
 
 Los datos no salen del móvil: la web solo sirve el código.
 
