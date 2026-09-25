@@ -9,6 +9,7 @@ const SECTIONS = [
   { to: 'nutricion', title: 'Nutrición', desc: 'Tipos de día, semáforo, perfil, alcohol' },
   { to: 'composicion', title: 'Composición corporal', desc: 'Rangos de referencia de la báscula' },
   { to: 'reglas', title: 'Reglas y alertas', desc: 'Sugerencia de tipo de día y umbrales de alertas' },
+  { to: 'informes', title: 'Informes para IA', desc: 'Prompt de cada tipo de informe' },
   { to: 'datos', title: 'Datos', desc: 'Copia de seguridad, importar, exportar a Excel y restablecer' },
 ];
 

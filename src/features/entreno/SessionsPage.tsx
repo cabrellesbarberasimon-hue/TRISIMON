@@ -6,7 +6,7 @@ import { db } from '../../db/db';
 import { SPORT_COLORS, SPORT_LABELS } from '../../domain/sports';
 import { paceFor, sessionLoad } from '../../domain/training';
 import { formatDate } from '../../lib/dates';
-import { formatDuration, formatMinutes, formatNumber } from '../../lib/format';
+import { formatDuration, formatMax, formatMinutes, formatNumber } from '../../lib/format';
 
 const PAGE = 40;
 
@@ -49,7 +49,7 @@ export function SessionsPage() {
                     <div className="text-sm text-slate-600">
                       {[
                         formatMinutes(s.durationMin),
-                        s.distanceKm ? `${formatNumber(s.distanceKm, 1)} km` : null,
+                        s.distanceKm ? `${formatMax(s.distanceKm, 1)} km` : null,
                         pace ? (pace.unit === 'km/h' ? `${formatNumber(pace.value, 1)} km/h` : `${formatDuration(pace.value)} ${pace.unit}`) : null,
                         s.avgPowerW ? `${s.avgPowerW} W` : null,
                         s.hrAvg ? `${s.hrAvg} ppm` : null,

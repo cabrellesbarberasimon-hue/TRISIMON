@@ -11,8 +11,9 @@ import { SPORT_COLORS, SPORT_LABELS } from '../../domain/sports';
 import { compliance, dueSessions } from '../../domain/training';
 import { useSettings } from '../../hooks/useSettings';
 import { addDays, formatDate, startOfWeek, today, weekDates, WEEKDAYS } from '../../lib/dates';
-import { formatMinutes, formatNumber } from '../../lib/format';
+import { formatMax, formatMinutes, formatNumber } from '../../lib/format';
 import { newPlanned, PlannedSessionSheet } from './PlannedSessionSheet';
+import { WeekNoteCard } from './WeekNoteCard';
 
 function SportTag({ sport }: { sport: PlannedSession['sport'] }) {
   return (
@@ -24,7 +25,7 @@ function SportTag({ sport }: { sport: PlannedSession['sport'] }) {
 }
 
 function summary(p: Pick<PlannedSession, 'durationMin' | 'distanceKm' | 'intensity'>) {
-  return [p.durationMin ? formatMinutes(p.durationMin) : null, p.distanceKm ? `${formatNumber(p.distanceKm, 1)} km` : null, p.intensity || null]
+  return [p.durationMin ? formatMinutes(p.durationMin) : null, p.distanceKm ? `${formatMax(p.distanceKm, 1)} km` : null, p.intensity || null]
     .filter(Boolean)
     .join(' · ');
 }
@@ -78,6 +79,8 @@ export function PlanWeek() {
           </div>
         </div>
       </Card>
+
+      <WeekNoteCard weekStart={weekStart} />
 
       {dates.map((date, i) => {
         const dayPlanned = planned.filter((p) => p.date === date);
@@ -150,7 +153,7 @@ export function PlanWeek() {
                     </div>
                     <div className="text-xs text-slate-500">
                       {formatMinutes(s.durationMin)}
-                      {s.distanceKm ? ` · ${formatNumber(s.distanceKm, 1)} km` : ''}
+                      {s.distanceKm ? ` · ${formatMax(s.distanceKm, 1)} km` : ''}
                       {s.rpe ? ` · RPE ${s.rpe}` : ''}
                     </div>
                   </Link>

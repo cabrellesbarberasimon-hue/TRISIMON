@@ -37,7 +37,8 @@ export const DEFAULT_ZONES: ZoneModels = {
   ],
 };
 
-export const DEFAULT_PROMPTS: Record<string, string> = {
+/** Plantillas de prompt editables; vacío = usar la plantilla por defecto (domain/reportPrompts) */
+export const DEFAULT_PROMPT_OVERRIDES: Record<string, string> = {
   revisionSemanal: '',
   bloque4: '',
   soloEntreno: '',
@@ -105,7 +106,7 @@ export const DEFAULT_SETTINGS: Settings = {
     whr: { min: null, max: 0.9 },
   },
   methodologyNote: excelData.methodology.replace(/\n?Todos los rangos.*$/s, '').trim(),
-  promptTemplates: DEFAULT_PROMPTS,
+  promptTemplates: DEFAULT_PROMPT_OVERRIDES,
 };
 
 type Plain = Record<string, unknown>;

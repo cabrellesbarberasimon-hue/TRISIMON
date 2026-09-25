@@ -52,6 +52,37 @@ Los datos viven solo en el dispositivo (IndexedDB). En *Ajustes → Datos*:
 
 Si borras los datos del navegador o desinstalas la app, se pierde todo lo que no esté en una copia.
 
+## Informes para IA (Claude / ChatGPT)
+
+1. **Inicio → Generar informe para IA** (o pestaña *Informes*): elige el tipo (revisión semanal,
+   bloque de 4 semanas, solo entrenamiento, solo composición y nutrición) y el periodo.
+2. El informe en Markdown empieza con el prompt (editable en *Ajustes → Informes para IA*) y
+   sigue con contexto, composición, pliegues, nutrición, entreno, bienestar, alertas automáticas y
+   el plan ya previsto. Opcionalmente añade un anexo JSON con los datos crudos.
+3. **Copiar**, **Compartir** (en el móvil se envía directamente a la app de Claude o ChatGPT),
+   **.md** o **.pdf**. Los informes quedan en el *Histórico*.
+4. Pega la respuesta de la IA en **Importar plan**: la app extrae el bloque ```json, lo valida,
+   muestra la vista previa y lo carga en la planificación (sustituyendo o combinando). Los tipos de
+   día de nutrición se recalculan y el texto de la respuesta se guarda como recomendaciones de esa
+   semana (visible en *Entreno → Semana*).
+
+Esquema del plan (lo pide el propio prompt):
+
+```json
+{
+  "version": 1,
+  "sesiones": [
+    { "fecha": "2026-10-05", "deporte": "carrera", "tipo": "Series", "duracion_min": 60, "distancia_km": 11,
+      "intensidad": "Z4", "descripcion": "…", "bloques": ["15' Z1-Z2", "5×1000 m a ritmo 10K", "10' Z1"] },
+    { "fecha": "2026-10-06", "deporte": "gimnasio", "tipo": "Fuerza", "duracion_min": 50,
+      "fuerza": [{ "ejercicio": "Sentadilla", "series": 4, "reps": 6, "carga_kg": 70 }] }
+  ]
+}
+```
+
+`deporte`: natacion, bici, carrera, brick, gimnasio, movilidad o descanso (acepta variantes como
+"natación", "ciclismo" o "fuerza").
+
 ## Estructura
 
 ```
@@ -87,4 +118,4 @@ Todo es editable desde la app. *Ajustes → Datos → Restablecer* vuelve a este
 3. ✅ Composición corporal y pliegues.
 4. ✅ Entrenamiento: planificación, registro y conexión con la nutrición.
 5. ✅ Dashboard, gráficas, PWA y exportación/importación.
-6. Informes para IA e importación de planes.
+6. ✅ Informes para IA e importación de planes.

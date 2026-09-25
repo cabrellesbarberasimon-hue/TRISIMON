@@ -8,7 +8,7 @@ import { SPORT_COLORS, SPORT_LABELS } from '../../domain/sports';
 import { recentWeeks, weekVolume } from '../../domain/training';
 import { useSettings } from '../../hooks/useSettings';
 import { addDays, formatDate, startOfWeek, today } from '../../lib/dates';
-import { formatMinutes, formatNumber, formatSigned } from '../../lib/format';
+import { formatMax, formatMinutes, formatNumber, formatSigned } from '../../lib/format';
 
 const CHART_SPORTS: Sport[] = ['natacion', 'bici', 'carrera', 'brick', 'gimnasio', 'movilidad'];
 const WEEKS = 12;
@@ -64,7 +64,7 @@ export function LoadPage() {
                   </td>
                   <td className="text-right">{v.sessions}</td>
                   <td className="text-right">{formatMinutes(v.minutes)}</td>
-                  <td className="text-right">{v.km ? formatNumber(v.km, 1) : '—'}</td>
+                  <td className="text-right">{v.km ? formatMax(v.km, 1) : '—'}</td>
                   <td className="text-right">{formatNumber(v.load)}</td>
                 </tr>
               ))}

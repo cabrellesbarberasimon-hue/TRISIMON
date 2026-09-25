@@ -12,7 +12,8 @@ const page = <K extends string>(loader: () => Promise<Record<K, ComponentType>>,
 const NutritionPage = page(() => import('./features/nutricion/NutritionPage'), 'NutritionPage');
 const BodyPage = page(() => import('./features/composicion/BodyPage'), 'BodyPage');
 const TrainingPage = page(() => import('./features/entreno/TrainingPage'), 'TrainingPage');
-const ReportsPage = page(() => import('./features/ComingSoon'), 'ReportsSoon');
+const ReportsPage = page(() => import('./features/informes/ReportsPage'), 'ReportsPage');
+const PromptSettings = page(() => import('./features/ajustes/PromptSettings'), 'PromptSettings');
 const SettingsHome = page(() => import('./features/ajustes/SettingsHome'), 'SettingsHome');
 const ProfileSettings = page(() => import('./features/ajustes/ProfileSettings'), 'ProfileSettings');
 const TestsSettings = page(() => import('./features/ajustes/TestsSettings'), 'TestsSettings');
@@ -54,6 +55,7 @@ export default function App() {
             <Route path="ajustes/nutricion" element={<NutritionSettings />} />
             <Route path="ajustes/composicion" element={<BodySettings />} />
             <Route path="ajustes/reglas" element={<RulesSettings />} />
+            <Route path="ajustes/informes" element={<PromptSettings />} />
             <Route path="ajustes/datos" element={<DataSettings />} />
           </Route>
         </Routes>
