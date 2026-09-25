@@ -93,7 +93,7 @@ src/
   features/    pantallas por módulo (ajustes, nutricion, composicion, entreno, informes, dashboard)
   components/  componentes de interfaz reutilizables
   lib/         fechas y formato de números en español
-public/icons/  iconos de la PWA (generados desde icon.svg)
+public/icons/  iconos de la PWA (generados desde logo-original.png con scripts/generate-icons.mjs)
 scripts/
   extract_excel.py   regenera src/db/seed/excelData.ts desde el Excel (requiere openpyxl)
 ```

@@ -12,7 +12,7 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['icons/favicon-32.png', 'icons/apple-touch-icon.png', 'icons/icon.svg'],
+      includeAssets: ['icons/favicon-32.png', 'icons/apple-touch-icon.png'],
       manifest: {
         name: 'TriSimon · Triatlón Valencia 2027',
         short_name: 'TriSimon',

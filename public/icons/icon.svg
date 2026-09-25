@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="112" fill="#0f766e"/>
-  <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M96 356c32-18 64-18 96 0s64 18 96 0 64-18 96 0 32 10 32 10" stroke-width="22" opacity="0.9"/>
-    <path d="M96 412c32-18 64-18 96 0s64 18 96 0 64-18 96 0 32 10 32 10" stroke-width="22" opacity="0.55"/>
-  </g>
-  <text x="256" y="276" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="800" font-size="200" fill="#ffffff" letter-spacing="-8">TS</text>
-</svg>
