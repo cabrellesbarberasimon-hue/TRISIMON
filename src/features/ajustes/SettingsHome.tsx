@@ -30,6 +30,9 @@ export function SettingsHome() {
           </li>
         ))}
       </ul>
+      <p className="mt-4 text-center text-xs text-slate-400">
+        Versión del {new Date(__BUILD_DATE__).toLocaleString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
+      </p>
     </>
   );
 }

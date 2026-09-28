@@ -38,8 +38,9 @@ Instalación como PWA (funciona sin conexión una vez instalada):
   instálala siempre desde Safari: los datos de la app instalada son independientes de los de la
   pestaña del navegador.
 
-Las actualizaciones se descargan solas: al publicar una versión nueva, basta con cerrar y volver
-a abrir la app.
+Las actualizaciones se instalan solas: la app comprueba si hay versión nueva al abrirla, al volver
+a ella y cada hora, y se recarga con la nueva en cuanto la descarga. La fecha de la versión que
+tienes aparece al final de *Ajustes*.
 
 ## Copias de seguridad
 
