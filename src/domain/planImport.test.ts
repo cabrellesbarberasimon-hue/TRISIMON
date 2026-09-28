@@ -117,3 +117,18 @@ describe('validar e importar el plan', () => {
     expect(normalizeSport('pádel')).toBeNull();
   });
 });
+
+describe('instrucciones para pedir el plan a Claude', async () => {
+  const { planRequestPrompt } = await import('./planImport');
+  it('incluye las fechas de la semana y un ejemplo importable con esas fechas', () => {
+    const p = planRequestPrompt('2026-09-28');
+    expect(p).toContain('del lunes 28/09/2026 al domingo 04/10/2026');
+    expect(p).toContain('entre 2026-09-28 y 2026-10-04');
+    const r = parsePlanResponse(p);
+    expect(r.ok).toBe(true);
+    if (r.ok) expect(r.sessions.map((s) => s.date)).toEqual(['2026-09-28', '2026-09-29', '2026-09-30']);
+  });
+  it('bloque de varias semanas', () => {
+    expect(planRequestPrompt('2026-09-28', 4)).toContain('al domingo 25/10/2026');
+  });
+});

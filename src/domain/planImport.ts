@@ -218,3 +218,26 @@ export function responseWithoutJson(response: string, jsonText: string | null): 
 }
 
 const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/**
+ * Instrucciones para pegar en cualquier conversación con Claude (o ChatGPT) y que devuelva
+ * la semana en el formato que la app sabe importar.
+ */
+export function planRequestPrompt(weekStart: string, weeks = 1): string {
+  const pad = (n: number) => String(n).padStart(2, '0');
+  const d = new Date(`${weekStart}T12:00:00`);
+  const end = new Date(d);
+  end.setDate(end.getDate() + 7 * weeks - 1);
+  const fmt = (x: Date) => `${pad(x.getDate())}/${pad(x.getMonth() + 1)}/${x.getFullYear()}`;
+  const iso = (x: Date) => `${x.getFullYear()}-${pad(x.getMonth() + 1)}-${pad(x.getDate())}`;
+  return `Cuando me des el plan de entrenamiento del lunes ${fmt(d)} al domingo ${fmt(end)}, añade al final un único bloque \`\`\`json con este formato exacto para importarlo en mi app:
+- Una entrada por sesión, con "fecha" (AAAA-MM-DD, entre ${iso(d)} y ${iso(end)}), "deporte", "tipo", "duracion_min", "distancia_km" (si aplica), "intensidad" (zona o RPE), "descripcion" y "bloques" (lista de partes de la sesión).
+- Sesiones de gimnasio con "fuerza": lista de { "ejercicio", "series", "reps", "carga_kg" } (carga_kg null si es peso corporal).
+- Días de descanso con "deporte": "descanso".
+- "deporte" solo puede ser: natacion, bici, carrera, brick, gimnasio, movilidad o descanso.
+
+Ejemplo:
+\`\`\`json
+${PLAN_SCHEMA_EXAMPLE.split('\ndeporte:')[0]!.replaceAll('2026-10-05', iso(d)).replaceAll('2026-10-06', iso(new Date(d.getTime() + 86_400_000))).replaceAll('2026-10-07', iso(new Date(d.getTime() + 2 * 86_400_000)))}
+\`\`\``;
+}

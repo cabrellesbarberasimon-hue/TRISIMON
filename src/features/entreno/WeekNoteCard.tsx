@@ -28,7 +28,7 @@ export function WeekNoteCard({ weekStart }: { weekStart: string }) {
     return (
       <p className="mb-4 text-xs text-slate-500">
         Sin recomendaciones de IA para esta semana.{' '}
-        <Link to="/informes/importar" className="text-brand-700">
+        <Link to={`/entreno/importar?semana=${weekStart}`} className="text-brand-700">
           Importar plan
         </Link>{' '}
         ·{' '}

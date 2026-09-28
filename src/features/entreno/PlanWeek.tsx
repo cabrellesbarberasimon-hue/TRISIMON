@@ -80,6 +80,13 @@ export function PlanWeek() {
         </div>
       </Card>
 
+      <Link
+        to={`/entreno/importar?semana=${weekStart}`}
+        className="mb-4 flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-3 py-2.5 text-sm font-medium text-white shadow-sm"
+      >
+        Importar semana de Claude
+      </Link>
+
       <WeekNoteCard weekStart={weekStart} />
 
       {dates.map((date, i) => {

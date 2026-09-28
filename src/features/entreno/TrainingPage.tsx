@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
 import { PageHeader, cx } from '../../components/ui';
+import { ImportPlanPage } from '../informes/ImportPlanPage';
 import { ExercisesPage } from './ExercisesPage';
 import { LoadPage } from './LoadPage';
 import { PlanWeek } from './PlanWeek';
@@ -45,6 +46,15 @@ export function TrainingPage() {
       <Route path="carga" element={<Tabbed><LoadPage /></Tabbed>} />
       <Route path="sesion/:id" element={<SessionForm />} />
       <Route path="ejercicios" element={<ExercisesPage />} />
+      <Route
+        path="importar"
+        element={
+          <>
+            <PageHeader title="Importar semana de Claude" back="/entreno" />
+            <ImportPlanPage />
+          </>
+        }
+      />
     </Routes>
   );
 }

@@ -62,7 +62,7 @@ Si borras los datos del navegador o desinstalas la app, se pierde todo lo que no
    el plan ya previsto. Opcionalmente añade un anexo JSON con los datos crudos.
 3. **Copiar**, **Compartir** (en el móvil se envía directamente a la app de Claude o ChatGPT),
    **.md** o **.pdf**. Los informes quedan en el *Histórico*.
-4. Pega la respuesta de la IA en **Importar plan**: la app extrae el bloque ```json, lo valida,
+4. Pega la respuesta de la IA (o sube el archivo) en **Entreno → Importar semana de Claude** o en **Informes → Importar plan**. Si pides el plan en una conversación normal con Claude, copia antes las instrucciones del botón "Copiar instrucciones para Claude": la app extrae el bloque ```json, lo valida,
    muestra la vista previa y lo carga en la planificación (sustituyendo o combinando). Los tipos de
    día de nutrición se recalculan y el texto de la respuesta se guarda como recomendaciones de esa
    semana (visible en *Entreno → Semana*).
